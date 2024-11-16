@@ -116,7 +116,7 @@
     }
   </style>
   <script>
-    let currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-dwcidwcigm.aoo%2F?va=d&t=hb&q="; // DuckDuckGo by default
+    let currentSearchEngine = "https://duckduckgo.com/?q="; // Default to DuckDuckGo
 
     function search(event) {
       event.preventDefault();
@@ -129,11 +129,11 @@
 
     function setSearchEngine(engine) {
       if (engine === "duckduckgo") {
-        currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-dwcidwcigm.aoo%2F?va=d&t=hb&q=";
+        currentSearchEngine = "https://duckduckgo.com/?q=";
       } else if (engine === "google") {
         currentSearchEngine = "https://www.google.com/search?q=";
       } else if (engine === "bing") {
-        currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-wuw%2Cbkne.aoo%2Fqecrah?q=";
+        currentSearchEngine = "https://www.bing.com/search?q=";
       }
     }
 
