@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Proxy Search</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e1e2e, #2a2a3b);
+      color: white;
+      overflow: hidden;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 800px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 25px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 15px;
+      transition: all 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    .top-bar:hover {
+      top: 0;
+    }
+
+    .logo img {
+      height: 35px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 15px;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .search-box button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 15px;
+      background-color: #4e8eff;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background-color: #0066cc;
+    }
+
+    .search-options {
+      display: flex;
+      gap: 15px;
+      margin-left: 10px;
+    }
+
+    .search-options button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 15px;
+      background-color: #4e8eff;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-options button:hover {
+      background-color: #0066cc;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 50px);
+      border: none;
+      margin-top: 50px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .search-options {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+  </style>
+  <script>
+    let currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-dwcidwcigm.aoo%2F?va=d&t=hb&q="; // DuckDuckGo by default
+
+    function search(event) {
+      event.preventDefault();
+      const query = document.getElementById("searchInput").value.trim();
+      const iframe = document.getElementById("searchIframe");
+      if (query) {
+        iframe.src = currentSearchEngine + encodeURIComponent(query);
+      }
+    }
+
+    function setSearchEngine(engine) {
+      if (engine === "duckduckgo") {
+        currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-dwcidwcigm.aoo%2F?va=d&t=hb&q=";
+      } else if (engine === "google") {
+        currentSearchEngine = "https://www.google.com/search?q=";
+      } else if (engine === "bing") {
+        currentSearchEngine = "https://bcd.ens.org/service/hvtrs8%2F-wuw%2Cbkne.aoo%2Fqecrah?q=";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const topBar = document.querySelector(".top-bar");
+      document.addEventListener("mousemove", (event) => {
+        if (event.clientY <= 50) {
+          topBar.style.top = "0";
+        } else {
+          topBar.style.top = "-50px";
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="logo">
+      <img src="assets/favicon/logo.png" alt="Logo">
+    </div>
+    <div class="search-box">
+      <form onsubmit="search(event)">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="search-options">
+      <button onclick="setSearchEngine('duckduckgo')">DuckDuckGo</button>
+      <button onclick="setSearchEngine('google')">Google</button>
+      <button onclick="setSearchEngine('bing')">Bing</button>
+    </div>
+  </div>
+  <iframe id="searchIframe" src=""></iframe>
+</body>
+</html>
